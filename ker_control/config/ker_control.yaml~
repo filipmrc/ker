@@ -1,0 +1,57 @@
+ker:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  ker_leg_controller:
+    type: "position_controllers/JointGroupPositionController"
+    publish_rate: 50
+    
+    joints:
+      - humerus_1_joint
+      - radius_1_joint
+      - humers_2_joint
+      - radius_2_joint
+      - femur_1_joint
+      - tibula_1_joint
+      - femur_2_joint
+      - tibula_2_joint
+    
+    gains:
+      humerus_1_joint:
+        {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}  
+      humerus_2_joint:
+        {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}  
+      radius_1_joint:
+        {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}  
+      radius_2_joint:
+        {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0} 
+      femur_1_joint:
+        {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0} 
+      femur_2_joint:
+        {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0} 
+      tibula_1_joint:
+        {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0} 
+      tibula_2_joint:
+        {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0} 
+
+  ker_shoulder_controller:
+    type: "position_controllers/JointGroupPositionController"
+    publish_rate: 50     
+    joints:
+      - motor_1_joint
+      - motor_2_joint
+      - motor_3_joint
+      - motor_4_joint
+
+    gains:
+       motor_1_joint:
+         {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}      
+       motor_2_joint:
+         {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}      
+       motor_3_joint:
+         {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}      
+       motor_4_joint:
+         {p: 1.0, d: 0.0, i: 0.0, i_clamp: 0.0}         
+
+
