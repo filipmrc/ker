@@ -10,7 +10,7 @@ ker:
     joints:
       - humerus_1_joint
       - radius_1_joint
-      - humers_2_joint
+      - humerus_2_joint
       - radius_2_joint
       - femur_1_joint
       - tibula_1_joint
