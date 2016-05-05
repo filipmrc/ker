@@ -6,7 +6,7 @@
     <arg name="use_sim_time" default="true"/>
     <arg name="gui" default="true"/>
     <arg name="headless" default="false"/>
-    <arg name="debug" default="false"/>
+    <arg name="debug" default="true"/>
     <arg name="verbose" default="false"/>
     <arg name="world_name" default="worlds/empty.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
 
@@ -46,6 +46,5 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model ker" />
-  <rosparam file="$(find ker_control)/config/ker_control.yaml" command="load"/>
-  <!--include file="$(find ker_gazebo)/launch/ker_controller.launch" /-->
+  <include file="$(find ker_control)/launch/ker_controller.launch" />
 </launch>
