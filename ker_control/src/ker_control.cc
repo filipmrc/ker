@@ -18,32 +18,53 @@ void Ker::setJoint(std::vector<float> joint_goal)
   leg_pub.publish(leg_joints);
 }
 
+// Banalan primjer periodičkog kretanja zglobova
+void Ker::walkingGait(std::vector<float> &goal, int i)
+{
+  goal.resize(NUM_JOINTS);
+  double T=100;
+  ROS_INFO_STREAM(2*PI*double(i/T));
+  goal[0] = 0;
+  goal[1] = 0;
+  goal[2] = 0;
+  goal[3] = 0;
+
+  goal[4] = sin(2*PI*double(i/T));
+  goal[5] = sin(2*PI*double(i/T) - PI/4);
+
+  goal[6] = sin(2*PI*double(i/T) + PI);
+  goal[7] = sin(2*PI*double(i/T) + PI -PI/4);
+
+  goal[8] = sin(2*PI*double(i/T) + 3*PI/2);
+  goal[9] = sin(2*PI*double(i/T) + 3*PI/2 - PI/4);
+
+  goal[10] = sin(2*PI*double(i/T) + PI/2);
+  goal[11] = sin(2*PI*double(i/T) + PI/2) - PI/4;
+}
+
+/*void Ker::legIK(geometry_msgs::Point pnt)
+{
+
+}*/
+
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "ker_control");
   ros::NodeHandle n;
-  ros::Rate r(1);
+  ros::Rate r(50);
 
   Ker ker(n);
   ROS_INFO_STREAM("Control node successfully initialized!");
 
   std::vector<float> goal(NUM_JOINTS);
-  goal[0] = 0;
-  goal[1] = 0;
-  goal[2] = 0;
-  goal[3] = 0;
-  goal[4] = 0;
-  goal[5] = 1;
-  goal[6] = 0;
-  goal[7] = 0;
-  goal[8] = 0;
-  goal[9] = 0;
-  goal[10] = 0;
-  goal[11] = 0;
+  int i = 0;
   while(ros::ok())
     {
+      ker.walkingGait(goal, i);
       ker.setJoint(goal);
+      i++;
       ros::spinOnce();
       r.sleep();
     }
 }
+
