@@ -163,8 +163,7 @@
         </visual>
         <collision>
             <geometry>
-              <!--box size="${motorlen} ${motorwidth} ${motorheight}"/-->
-              <mesh filename="package://ker_description/meshes/roll.STL" scale="1 1 1"/>
+              <box size="${motorlen} ${motorwidth} ${motorheight}"/>
             </geometry>
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
@@ -177,14 +176,13 @@
     <link name="${name}">
         <xacro:humerus_femur_inertial mass="1"/>
         <collision>
-          <origin xyz="0 0 ${-motorheight/2-humerusheight/2 + 0.018}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-humerusheight/2}" rpy="0 0 0"/>
           <geometry>
-            <!--box size="${humeruslen} ${humeruswidth} ${humerusheight}"/-->
-            <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
+            <box size="${humeruslen} ${humeruswidth} ${humerusheight}"/>
           </geometry>
         </collision>
         <visual>
-          <origin xyz="0 0 ${-motorheight/2-humerusheight/2 + 0.018}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-humerusheight/2}" rpy="0 0 0"/>
           <geometry>
             <!--box size = "${humeruslen} ${humeruswidth} ${humerusheight}"/-->
             <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
@@ -200,14 +198,13 @@
     <link name="${name}">
         <xacro:humerus_femur_inertial mass="1"/>
         <collision>
-          <origin xyz="0 0 ${-motorheight/2-femurheight/2 + 0.018}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-femurheight/2}" rpy="0 0 0"/>
           <geometry>
-            <!--box size="${femurlen} ${femurwidth} ${femurheight}"/-->
-            <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
+            <box size="${femurlen} ${femurwidth} ${femurheight}"/>
           </geometry>
         </collision>
         <visual>
-          <origin xyz="0 0 ${-motorheight/2-femurheight/2 + 0.018}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-femurheight/2}" rpy="0 0 0"/>
           <geometry>
             <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
             <!--box size = "${femurlen} ${femurwidth} ${femurheight}"/-->
@@ -223,14 +220,14 @@
     <link name="${name}">
         <xacro:radius_tibula_inertial mass="1"/>
         <collision>
-          <origin xyz="0 0 ${-motorheight/2-radiusheight/2 + 0.037}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-femurheight/2}" rpy="0 0 0"/>
           <geometry>
             <!--box size="${radiuslen} ${radiuswidth} ${radiusheight}"/-->
             <mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/>
           </geometry>
         </collision>
         <visual>
-          <origin xyz="0 0 ${-motorheight/2-radiusheight/2 + 0.037}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-radiusheight/2}" rpy="0 0 0"/>
           <geometry>
             <mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/>
             <!--box size = "${radiuslen} ${radiuswidth} ${radiusheight}"/-->
@@ -250,14 +247,14 @@
     <link name="${name}">
         <xacro:radius_tibula_inertial mass="1"/>
         <collision>
-          <origin xyz="0 0 ${-motorheight/2-tibulaheight/2 + 0.037}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-tibulaheight/2}" rpy="0 0 0"/>
           <geometry>
             <!--box size="${tibulalen} ${tibulawidth} ${tibulaheight}"/-->
             <mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/>
           </geometry>
         </collision>
         <visual>
-          <origin xyz="0 0 ${-motorheight/2-tibulaheight/2 + 0.037}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-tibulaheight/2}" rpy="0 0 0"/>
           <geometry>
             <!--box size = "${tibulalen} ${tibulawidth} ${tibulaheight}"/-->
             <mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/>
