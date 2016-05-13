@@ -44,7 +44,7 @@
 	</xacro:macro>
 
     <!--BODY INERTIAL PARAMETERS-->
-    <xacro:macro name="default_inertial" params="mass">
+    <xacro:macro name="body_inertial">
         <inertial>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <mass value="0.1045248" />
@@ -55,7 +55,7 @@
     </xacro:macro>
 
     <!--SHOULDER INERTIAL PARAMETERS-->
-    <xacro:macro name="dynamixel_inertial" params="mass">
+    <xacro:macro name="shoulder_inertial">
         <inertial>
                 <mass value="0.0082825" />
                 <inertia ixx="${1000*0.00000000163}" ixy="0.0" ixz="0.0"
@@ -78,7 +78,7 @@
     <!--HUMERUS AND FEMUR INERTIAL PARAMETERS-->
     <xacro:macro name="humerus_femur_inertial" params="mass">
         <inertial>
-                <origin rpy="0 0 0" xyz="0 0 ${-motorheight/2-humerusheight/2}"/>
+                <origin rpy="0 0 0" xyz="0 0 ${-humerusheight/2}"/>
                 <mass value="0.03619760" />
                 <inertia ixx="${1000*0.00000002198}" ixy="0.0" ixz="${1000*0.00000000004}"
                      iyy="${1000*0.00000002188}" iyz="0.0"
@@ -89,7 +89,7 @@
     <!--RADIUS AND TIBULA INERTIAL PARAMETERS-->
     <xacro:macro name="radius_tibula_inertial" params="mass">
         <inertial>
-                <origin rpy="0 0 0" xyz="0 0 ${-humerusheight/2-radiusheight/2}"/>
+                <origin rpy="0 0 0" xyz="0 0 ${-humerusheight/2-radiusheight/2 + 0.037}"/>
                 <mass value="0.00992447" />
                 <inertia ixx="${0.00000000269*1000}" ixy="0.0" ixz="0.0"
                      iyy="${0.00000000199*1000}" iyz="0.0"
@@ -112,45 +112,15 @@
             <child link="${name}"/>
             <origin xyz="${origin}" rpy="0 0 0"/>
             <axis xyz="${axis}"/>
-            <dynamics damping="0.1" friction="0.1"/>
-            <limit effort="3.0" velocity="0.5" lower="-3.15" upper="3.15"/>
+            <dynamics damping="0.0"/>
+            <limit effort="1.5" velocity="0.5" lower="-3.15" upper="3.15"/>
         </joint>
     </xacro:macro>
 
-    <!--MOTOR (CORONA)-->
-    <xacro:macro name="bigmotor" params="name pname origin">
-    <link name="${name}">
-        <inertial>
-                <origin rpy="0 0 0" xyz="${origin}"/>
-                <mass value="${2*0.000167}" />
-                <inertia ixx="${200*0.0167*0.08333333*bigmotorwidth^2 + 200*0.0167*0.08333333*bigmotorheight^2}" ixy="0.0" ixz="0.0"
-                     iyy="${200*0.0167*0.08333333*bigmotorlen^2 + 200*0.0167*0.08333333*bigmotorheight^2}" iyz="0.0"
-                     izz="${200*0.0167*0.08333333*bigmotorlen^2 + 200*0.0167*0.08333333*bigmotorwidth^2}" />
-        </inertial>
-        <visual>
-            <geometry>
-              <box size="${bigmotorlen} ${bigmotorwidth} ${bigmotorheight}"/>
-            </geometry>
-            <origin xyz="0 0 0" rpy="${3.1415/2} 0 0"/>
-        </visual>
-        <collision>
-            <geometry>
-              <box size="${bigmotorlen} ${bigmotorwidth} ${bigmotorheight}"/>
-            </geometry>
-            <origin xyz="0 0 0" rpy="${3.1415/2} 0 0"/>
-        </collision>
-    </link>
-    <joint name="${name}_joint" type="fixed">
-        <parent link="${pname}"/>
-        <child link="${name}"/>
-        <origin xyz="${origin}" rpy="0 0 0"/>
-    </joint>
-    </xacro:macro>
-
-    <!--MOTOR (DYNAMIXEL)-->
+    <!--SHOULDER-->
     <xacro:macro name="motor" params="name *type">
     <link name="${name}">
-        <xacro:dynamixel_inertial mass="0.1"/>
+        <xacro:shoulder_inertial/>
         <visual>
             <geometry>
               <!--box size="${motorlen} ${motorwidth} ${motorheight}"/-->
@@ -177,14 +147,14 @@
     <link name="${name}">
         <xacro:humerus_femur_inertial mass="1"/>
         <collision>
-          <origin xyz="0 0 ${-motorheight/2-humerusheight/2 + 0.018}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-humerusheight/2 +0.018 }" rpy="0 0 0"/>
           <geometry>
             <!--box size="${humeruslen} ${humeruswidth} ${humerusheight}"/-->
             <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
           </geometry>
         </collision>
         <visual>
-          <origin xyz="0 0 ${-motorheight/2-humerusheight/2 + 0.018}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-humerusheight/2 +0.018 }" rpy="0 0 0"/>
           <geometry>
             <!--box size = "${humeruslen} ${humeruswidth} ${humerusheight}"/-->
             <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
@@ -200,14 +170,14 @@
     <link name="${name}">
         <xacro:humerus_femur_inertial mass="1"/>
         <collision>
-          <origin xyz="0 0 ${-motorheight/2-femurheight/2 + 0.018}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-femurheight/2 +0.018}" rpy="0 0 0"/>
           <geometry>
             <!--box size="${femurlen} ${femurwidth} ${femurheight}"/-->
             <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
           </geometry>
         </collision>
         <visual>
-          <origin xyz="0 0 ${-motorheight/2-femurheight/2 + 0.018}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-femurheight/2+0.018 }" rpy="0 0 0"/>
           <geometry>
             <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
             <!--box size = "${femurlen} ${femurwidth} ${femurheight}"/-->
@@ -223,10 +193,11 @@
     <link name="${name}">
         <xacro:radius_tibula_inertial mass="1"/>
         <collision>
-          <origin xyz="0 0 ${-motorheight/2-radiusheight/2 + 0.037}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-radiusheight/2 +0.009}" rpy="0 0 0"/>
           <geometry>
             <!--box size="${radiuslen} ${radiuswidth} ${radiusheight}"/-->
-            <mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/>
+            <!--mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/-->
+            <sphere radius="0.01"/>
           </geometry>
         </collision>
         <visual>
@@ -238,8 +209,11 @@
         </visual>
     </link>
     <gazebo reference="${name}">
-      <mu1>1000</mu1>
-      <mu2>1000</mu2>
+      <minDepth>0.001</minDepth>
+      <maxContacts>1</maxContacts>
+      <fdir1>1 1 1</fdir1>
+      <mu1>1.0</mu1>
+      <mu2>100.0</mu2>
     </gazebo>
     <xacro:insert_block name="type" />
     <xacro:ker_transmission joint_name="${name}_joint" /> 
@@ -250,10 +224,11 @@
     <link name="${name}">
         <xacro:radius_tibula_inertial mass="1"/>
         <collision>
-          <origin xyz="0 0 ${-motorheight/2-tibulaheight/2 + 0.037}" rpy="0 0 0"/>
+          <origin xyz="0 0 ${-motorheight/2-tibulaheight/2 +0.009}" rpy="0 0 0"/>
           <geometry>
             <!--box size="${tibulalen} ${tibulawidth} ${tibulaheight}"/-->
-            <mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/>
+            <sphere radius="0.01"/>
+            <!--mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/-->
           </geometry>
         </collision>
         <visual>
@@ -265,8 +240,11 @@
         </visual>
     </link>
     <gazebo reference="${name}">
-      <mu1>1000</mu1>
-      <mu2>1000</mu2>
+      <minDepth>0.001</minDepth>
+      <maxContacts>1</maxContacts>
+      <fdir1>1 1 1</fdir1>
+      <mu1>1.0</mu1>
+      <mu2>100.0</mu2>
     </gazebo>
     <xacro:insert_block name="type" />
     <xacro:ker_transmission joint_name="${name}_joint" /> 
@@ -274,7 +252,7 @@
 
     <!--BODY-->
     <link name="body">
-        <xacro:default_inertial mass="0.6"/>
+        <xacro:body_inertial/>
 
         <collision>
           <origin xyz="0 0 0.0" rpy="0 0 0"/>
@@ -292,26 +270,20 @@
         </visual>
     </link>
 
-    <!--EXECUTE MACROS-->
-    <!--xacro:bigmotor name="big_motor_1" pname="body" origin="${bodylen/2-bigmotorlen} ${bodywidth/2-bigmotorlen/2} ${-bigmotorwidth+bodyheight/2}" />
-    <xacro:bigmotor name="big_motor_2" pname="body" origin="${bodylen/2-bigmotorlen} ${-bodywidth/2+bigmotorlen/2} ${-bigmotorheight/2+bodyheight/2}" />
-    <xacro:bigmotor name="big_motor_3" pname="body" origin="${-bodylen/2+bigmotorlen} ${-bodywidth/2+bigmotorlen/2} ${-bigmotorheight/2+bodyheight/2}" />
-    <xacro:bigmotor name="big_motor_4" pname="body" origin="${-bodylen/2+bigmotorlen} ${bodywidth/2-bigmotorlen/2} ${-bigmotorheight/2+bodyheight/2}" /-->
-
     <xacro:motor name="motor_1"> 
-        <xacro:revolute name="motor_1" pname="body" origin="${bodylen/2-motorlen-0.01} ${bodywidth/2-bigmotorlen/2} ${-bigmotorwidth -0.005 +bodyheight/2}" axis="1 0 0"/> 
+        <xacro:revolute name="motor_1" pname="body" origin="${bodylen/2-motorlen-0.01} ${bodywidth/2-bigmotorlen/2} ${-bigmotorwidth +bodyheight/2 -0.005}" axis="1 0 0"/> 
     </xacro:motor>
     <xacro:ker_transmission joint_name="motor_1_joint" />  
     <xacro:motor name="motor_2"> 
-        <xacro:revolute name="motor_2" pname="body" origin="${bodylen/2-motorlen-0.01} ${-bodywidth/2+bigmotorlen/2} ${-bigmotorwidth -0.005 +bodyheight/2}" axis="1 0 0"/> 
+        <xacro:revolute name="motor_2" pname="body" origin="${bodylen/2-motorlen-0.01} ${-bodywidth/2+bigmotorlen/2} ${-bigmotorwidth +bodyheight/2 -0.005}" axis="1 0 0"/> 
     </xacro:motor>
     <xacro:ker_transmission joint_name="motor_2_joint" /> 
     <xacro:motor name="motor_3"> 
-        <xacro:revolute name="motor_3" pname="body" origin="${-bodylen/2+motorlen+0.01} ${-bodywidth/2+bigmotorlen/2} ${-bigmotorwidth -0.005 +bodyheight/2}" axis="1 0 0"/> 
+        <xacro:revolute name="motor_3" pname="body" origin="${-bodylen/2+bigmotorheight+motorlen+0.01} ${-bodywidth/2+bigmotorlen/2} ${-bigmotorwidth +bodyheight/2 -0.005}" axis="1 0 0"/> 
     </xacro:motor>
     <xacro:ker_transmission joint_name="motor_3_joint" /> 
     <xacro:motor name="motor_4"> 
-        <xacro:revolute name="motor_4" pname="body" origin="${-bodylen/2+motorlen+0.01} ${bodywidth/2-bigmotorlen/2} ${-bigmotorwidth -0.005 +bodyheight/2}" axis="1 0 0"/> 
+        <xacro:revolute name="motor_4" pname="body" origin="${-bodylen/2+bigmotorheight+motorlen+0.01} ${bodywidth/2-bigmotorlen/2} ${-bigmotorwidth +bodyheight/2 -0.005}" axis="1 0 0"/> 
     </xacro:motor>
     <xacro:ker_transmission joint_name="motor_4_joint" /> 
 
