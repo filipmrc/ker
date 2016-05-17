@@ -1,0 +1,6 @@
+<launch>
+<param name="robot_description" command="$(find xacro)/xacro '$(find ker_description)/robots/ker2.urdf.xacro'" />
+
+<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model ker" />
+<include file="$(find ker_control)/launch/ker_controller.launch" />
+</launch>
