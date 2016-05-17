@@ -1,4 +1,4 @@
-function [ T] = FK( a_i, d_i , theta_i , alpha_i )
+function [T, Ti] = FK( a_i, d_i , theta_i , alpha_i )
 %Calculates forward kinematics given the DH parameters in array form.
 syms a d theta alph;
 T = eye(4);

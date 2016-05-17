@@ -209,11 +209,11 @@
         </visual>
     </link>
     <gazebo reference="${name}">
-        <kp>1000000.0</kp>
+        <kp>10000.0</kp>
         <kd>100.0</kd>
-        <mu1>1.0</mu1>
-        <mu2>1.0</mu2>
-        <fdir1>1 0 0</fdir1>
+        <mu1>1000.0</mu1>
+        <mu2>1000.0</mu2>
+        <fdir1>1 1 0</fdir1>
         <maxVel>1.0</maxVel>
         <minDepth>0.0</minDepth>
     </gazebo>
@@ -242,11 +242,11 @@
         </visual>
     </link>
     <gazebo reference="${name}">
-        <kp>1000000.0</kp>
+        <kp>10000.0</kp>
         <kd>100.0</kd>
-        <mu1>1.0</mu1>
-        <mu2>1.0</mu2>
-        <fdir1>1 0 0</fdir1>
+        <mu1>1000.0</mu1>
+        <mu2>1000.0</mu2>
+        <fdir1>1 1 0</fdir1>
         <maxVel>1.0</maxVel>
         <minDepth>0.0</minDepth>
     </gazebo>

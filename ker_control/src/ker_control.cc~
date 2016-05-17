@@ -35,11 +35,11 @@ void Ker::walkingGait(std::vector<float> &goal, int i)
   goal[6] = sin(2*PI*double(i/T) + PI);
   goal[7] = sin(2*PI*double(i/T) + PI -PI/4);
 
-  goal[8] = sin(2*PI*double(i/T) + 3*PI/2);
-  goal[9] = sin(2*PI*double(i/T) + 3*PI/2 - PI/4);
+  goal[8] = 0*sin(2*PI*double(i/T) + 3*PI/2);
+  goal[9] = 0*sin(2*PI*double(i/T) + 3*PI/2 - PI/4);
 
-  goal[10] = sin(2*PI*double(i/T) + PI/2);
-  goal[11] = sin(2*PI*double(i/T) + PI/2) - PI/4;
+  goal[10] = 0*sin(2*PI*double(i/T) + PI/2);
+  goal[11] = 0*sin(2*PI*double(i/T) + PI/2 - PI/4);
 }
 
 /*void Ker::legIK(geometry_msgs::Point pnt)

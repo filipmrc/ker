@@ -19,6 +19,7 @@ class Ker
 private:
   ros::Publisher shoulder_pub, leg_pub;
   ros::Time start_time;
+  int state;
 
 public:
   Ker(ros::NodeHandle n)
@@ -26,11 +27,14 @@ public:
     shoulder_pub = n.advertise<std_msgs::Float64MultiArray>("ker/ker_shoulder_controller/command",1);
     leg_pub = n.advertise<std_msgs::Float64MultiArray>("ker/ker_leg_controller/command",1);
     start_time = ros::Time::now();
+    state = 0;
   }
   void setJoint(std::vector<float> joint_goal);
 
   void walkingGait(std::vector<float> &goal, int i);
 
   void legIK(geometry_msgs::Point point);
+
+  void stanceTest(std::vector<float>& goal);
 };
 #endif /*KER_CONTROL_H_*/
