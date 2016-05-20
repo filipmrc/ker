@@ -103,7 +103,7 @@ dFPMdq  = [JM1_A zeros(3,9); zeros(3,3) JM2_A zeros(3,6); zeros(3,6) JM3_A zeros
 dLdFPM = FPM/(sqrt(sum(sum(FPM.^2))));
 dLdXML4 = (XML4 - FPG)/(sqrt(sum(sum((XML4 - FPG).^2))));
 
-dXML4dq = (dLdXML4'*dLdXML4)\dLdXML4'*dLdFPM*dFPMdq;
+%dXML4dq = (dLdXML4'*dLdXML4)\dLdXML4'*dLdFPM*dFPMdq;
 
 %JMG_A = JBG_A + RB*dXML4dq + dRBdq*XML4;
 

@@ -43,7 +43,6 @@
     <!-- more default parameters can be changed here -->
   <!--/include>-->
   <!-- state publisher -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model ker" />
   <include file="$(find ker_control)/launch/ker_controller.launch" />

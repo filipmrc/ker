@@ -18,65 +18,35 @@ void Ker::setJoint(std::vector<float> joint_goal)
   leg_pub.publish(leg_joints);
 }
 
-void Ker::stanceTest(std::vector<float>& goal)
+Affine3f Ker::legFK(Vector3f q)
 {
-  goal.resize(NUM_JOINTS);
-  goal[0] = PI/10;
-  goal[1] = -PI/10;
-  goal[2] = -PI/10;
-  goal[3] = PI/10;
-  goal[4] = -PI/6;
-  goal[5] = PI/3;
-  goal[6] = PI/6;
-  goal[7] = -PI/3;
-  goal[8] = PI/6;
-  goal[9] = -PI/3;
-  goal[10] = -PI/6;
-  goal[11] = PI/3;
+  Affine3f fk;
 
+  fk(0,0) = cos(q(0))*cos(q(1))*cos(PI/2 + q(2)) - cos(q(0))*sin(q(1))*sin(PI/2 + q(2));
+  fk(0,1) = -sin(q(0));
+  fk(0,2) = cos(q(0))*cos(q(1))*sin(PI/2 + q(2)) + cos(q(0))*cos(PI/2 + q(2))*sin(q(1));
+  fk(0,3) = d4*(cos(q(0))*cos(q(1))*sin(PI/2 + q(2)) + cos(q(0))*cos(PI/2 + q(2))*sin(q(1))) + a1*cos(q(0)) + a2*cos(q(0))*cos(q(1));
+
+  fk(1,0) = cos(q(1))*cos(PI/2 + q(2))*sin(q(0)) - sin(q(0))*sin(q(1))*sin(PI/2 + q(2));
+  fk(1,1) = cos(q(0));
+  fk(1,2) = cos(q(1))*sin(q(0))*sin(PI/2 + q(2)) + cos(PI/2 + q(2))*sin(q(0))*sin(q(1));
+  fk(1,3) = d4*(cos(q(1))*sin(q(0))*sin(PI/2 + q(2)) + cos(PI/2 + q(2))*sin(q(0))*sin(q(1))) + a1*sin(q(0)) + a2*cos(q(1))*sin(q(0));
+
+  fk(2,0) = - cos(q(1))*sin(PI/2 + q(2)) - cos(PI/2 + q(2))*sin(q(1));
+  fk(2,1) = 0;
+  fk(2,2) = cos(q(1))*cos(PI/2 + q(2)) - sin(q(1))*sin(PI/2 + q(2));
+  fk(2,3) = d4*(cos(q(1))*cos(PI/2 + q(2)) - sin(q(1))*sin(PI/2 + q(2))) - a2*sin(q(1));
+
+  fk(3,0) = 0;
+  fk(3,1) = 0;
+  fk(3,2) = 0;
+  fk(3,3) = 1;
+
+  geometry_msgs::Pose noga;
+  noga.position.x = fk(0,3); noga.position.y = fk(1,3); noga.position.z = fk(2,3);
+  fk_pub.publish(noga);
+  return fk;
 }
-
-// Banalan primjer periodičkog kretanja zglobova
-void Ker::walkingGait(std::vector<float> &goal, int i)
-{
-  goal.resize(NUM_JOINTS);
-  double T=100;
-
-  if (i % 100 == 0)
-    {
-      state++;
-      state%=4;
-    }
-
-  state = 0;
-
-
-  switch(state)
-  {
-    case(0):
-      goal[4] = sin(2*PI*double(i/T));
-      goal[5] = sin(2*PI*double(i/T) - PI/4);
-      break;
-    case (2):
-      goal[6] = sin(2*PI*double(i/T) + PI/2);
-      goal[7] = sin(2*PI*double(i/T) + PI/2 -PI/4);
-      break;
-    case (1):
-      goal[8] = sin(2*PI*double(i/T) + 3*PI/2);
-      goal[9] = sin(2*PI*double(i/T) + 3*PI/2 - PI/4);
-      break;
-    case (3):
-      goal[10] = sin(2*PI*double(i/T) + PI/2);
-      goal[11] = sin(2*PI*double(i/T) + PI/2 - PI/4);
-      break;
-    }
-}
-
-/*void Ker::legIK(geometry_msgs::Point pnt)
-{
-
-}*/
-
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "ker_control");
@@ -85,15 +55,25 @@ int main(int argc, char** argv)
 
   Ker ker(n);
   ROS_INFO_STREAM("Control node successfully initialized!");
-
   std::vector<float> goal(NUM_JOINTS);
-  int i = 0;
+  //ker.walkingGait(goal, i);
+
   while(ros::ok())
     {
-      //ker.walkingGait(goal, i);
-      ker.stanceTest(goal);
+      goal.resize(NUM_JOINTS);
+      goal[0] = PI/10;
+      goal[1] = -PI/10;
+      goal[2] = -PI/10;
+      goal[3] = PI/10;
+      goal[4] = -PI/6;
+      goal[5] = PI/3;
+      goal[6] = PI/6;
+      goal[7] = -PI/3;
+      goal[8] = PI/6;
+      goal[9] = -PI/3;
+      goal[10] = -PI/6;
+      goal[11] = PI/3;
       ker.setJoint(goal);
-      i++;
       ros::spinOnce();
       r.sleep();
     }

@@ -1,4 +1,5 @@
 e_max = 0;
+Tf_leg = matlabFunction(T_leg_foot1);
 for i = 1:50
     for j = 1:50
         for k = 1:50
@@ -9,9 +10,9 @@ for i = 1:50
                 tmp = Tf_leg( 0.7, 7, 6, qs(1,u), qs(2,u), qs(3,u));               
                 e_min = min(e_min,abs([T_(1,4) T_(2,4) T_(3,4)] - tmp(1:3,4)'));
             end
-            if e_min>[0.1 0.1 0.1]
-                disp([j k]);
-            end
+            disp(sum(e_min.^2));
+                %%disp([j k]);
+            %%end
             e_max = max(e_max,e_min);
         end
     end
