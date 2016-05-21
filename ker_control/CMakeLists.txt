@@ -7,6 +7,8 @@ project(ker_control)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   actionlib
+  tf
+  tf_conversions
   hardware_interface
   controller_manager
 )
@@ -137,6 +139,12 @@ add_executable(ker_control src/ker_control.cc)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(ker_control
+   ${catkin_LIBRARIES}
+)
+
+add_executable(frame_broadcaster src/frame_broadcaster.cc)
+
+target_link_libraries(frame_broadcaster
    ${catkin_LIBRARIES}
 )
 

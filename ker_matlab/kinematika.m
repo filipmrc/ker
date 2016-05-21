@@ -1,5 +1,21 @@
+syms q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12
+%% Generate foot to leg FK
+syms a1f a2f a3f d1f d4f
+as_foot_leg = [a1f a2f 0 0];
+ds_foot_leg = [0 0 0 d4f];
+alphas_foot_leg = [0 0 pi/2 0];
+thetas_foot_leg1 = [q3 q2 q1+pi/2 0];
+thetas_foot_leg2 = [q6 q5 q4+pi/2 0];
+thetas_foot_leg3 = [q9 q8 q7+pi/2 0];
+thetas_foot_leg4 = [q12 q11 q10+pi/2 0];
+
+T_foot_leg1 = FK(as_foot_leg, ds_foot_leg, thetas_foot_leg1, alphas_foot_leg);
+T_foot_leg2 = FK(as_foot_leg, ds_foot_leg, thetas_foot_leg2, alphas_foot_leg);
+T_foot_leg3 = FK(as_foot_leg, ds_foot_leg, thetas_foot_leg3, alphas_foot_leg);
+T_foot_leg4 = FK(as_foot_leg, ds_foot_leg, thetas_foot_leg4, alphas_foot_leg);
+
 %% Generate leg to foot FK
-syms  a1 a2 a3  d1 d4 q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12
+syms a1 a2 d4
 as_leg_foot = [a1 a2 0 0];
 ds_leg_foot = [0 0 0 d4];
 alphas_leg_foot = [-pi/2 0 pi/2 0];

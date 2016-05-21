@@ -13,7 +13,9 @@
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
-    <remap from="/joint_states" to="/ker/joint_states" />
+    <!--remap from="/joint_states" to="/ker/joint_states" /-->
   </node>
+
+  <node name="frame_broadcaster" pkg="ker_control" type="frame_broadcaster"> </node>
 
 </launch>

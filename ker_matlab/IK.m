@@ -1,6 +1,6 @@
-function [ q ] = IK( w )
+function [ Q ] = IK( w)
 %IK za kera
-a1 = 0.7; a2 = 7; d4 = 6;
+a1 = 0.0272; a2 = 0.056; d4 = 0.03958;
 
 x = w(1);
 y = w(2);
@@ -12,9 +12,6 @@ if x>= 0
 else
     q(1,1:16) = atan2(y,x) + pi;
 end
-
-
-h0 = q(1,1);
 
 t3_1 = (z^2 + (sqrt(x^2 + y^2)-a1)^2 - d4^2 - a2^2)/(2*a2*d4);
 t3_2 = (z^2 + (-sqrt(x^2 + y^2)-a1)^2 - d4^2 - a2^2)/(2*a2*d4);
@@ -85,8 +82,13 @@ q(2,13) = -q(2,5);
 q(2,14) = -q(2,6);
 q(2,15) = -q(2,7);
 q(2,16) = -q(2,8);
-
-q = double(q);
+Q = [];
+for k = size(q,2):-1:1
+    w_k = leg_fk(q(1,k),q(2,k),q(3,k));
+    if (norm(w-w_k(1:3,4)',inf) < 1e-6) % TODO: check cutoff
+        Q = [Q q(:,k)];
+    end
+end
 
 end
 
