@@ -57,6 +57,7 @@
     <!--SHOULDER INERTIAL PARAMETERS-->
     <xacro:macro name="shoulder_inertial">
         <inertial>
+                <origin rpy="0 0 0" xyz="0 0 ${-bigmotorwidth/2}"/>
                 <mass value="0.0082825" />
                 <inertia ixx="${1000*0.00000000163}" ixy="0.0" ixz="0.0"
                      iyy="${1000*0.00000000114}" iyz="0.0"
@@ -78,7 +79,7 @@
     <!--HUMERUS AND FEMUR INERTIAL PARAMETERS-->
     <xacro:macro name="humerus_femur_inertial" params="mass">
         <inertial>
-                <origin rpy="0 0 0" xyz="0 0 ${-humerusheight/2}"/>
+                <origin rpy="0 0 0" xyz="0 0 ${-humerusheight/2 + 0.01}"/>
                 <mass value="0.03619760" />
                 <inertia ixx="${1000*0.00000002198}" ixy="0.0" ixz="${1000*0.00000000004}"
                      iyy="${1000*0.00000002188}" iyz="0.0"
@@ -89,7 +90,7 @@
     <!--RADIUS AND TIBULA INERTIAL PARAMETERS-->
     <xacro:macro name="radius_tibula_inertial" params="mass">
         <inertial>
-                <origin rpy="0 0 0" xyz="0 0 ${-humerusheight/2-radiusheight/2 + 0.037}"/>
+                <origin rpy="0 0 0" xyz="0 0 ${-radiusheight/2 +0.01}"/>
                 <mass value="0.00992447" />
                 <inertia ixx="${0.00000000269*1000}" ixy="0.0" ixz="0.0"
                      iyy="${0.00000000199*1000}" iyz="0.0"
@@ -127,8 +128,8 @@
               <mesh filename="package://ker_description/meshes/roll.STL" scale="1 1 1"/>
             </geometry>
             <origin xyz="0 0 ${-bigmotorwidth/2}" rpy="0 0 0"/>
-            <material name="blue">
-                <color rgba="0 0 .8 1"/>
+            <material name="grey">
+                <color rgba=".2 .2 .2 1"/>
             </material>
         </visual>
         <collision>
@@ -159,6 +160,9 @@
             <!--box size = "${humeruslen} ${humeruswidth} ${humerusheight}"/-->
             <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
           </geometry>
+          <material name="grey">
+              <color rgba=".2 .2 .2 1"/>
+          </material>
         </visual>
     </link>
     <xacro:insert_block name="type" />
@@ -182,7 +186,10 @@
             <mesh filename="package://ker_description/meshes/humerus.stl" scale="1 1 1"/>
             <!--box size = "${femurlen} ${femurwidth} ${femurheight}"/-->
           </geometry>
-        </visual>
+          <material name="grey">
+              <color rgba=".2 .2 .2 1"/>
+          </material>
+       </visual>
     </link>
     <xacro:insert_block name="type" />
     <xacro:ker_transmission joint_name="${name}_joint" /> 
@@ -206,6 +213,9 @@
             <mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/>
             <!--box size = "${radiuslen} ${radiuswidth} ${radiusheight}"/-->
           </geometry>
+          <material name="grey">
+              <color rgba=".2 .2 .2 1"/>
+          </material>
         </visual>
     </link>
     <gazebo reference="${name}">
@@ -239,6 +249,9 @@
             <!--box size = "${tibulalen} ${tibulawidth} ${tibulaheight}"/-->
             <mesh filename="package://ker_description/meshes/radius.stl" scale="1 1 1"/>
           </geometry>
+          <material name="grey">
+              <color rgba=".2 .2 .2 1"/>
+          </material>
         </visual>
     </link>
     <gazebo reference="${name}">
@@ -274,7 +287,7 @@
         </visual>
     </link>
     <!--DUMMY-->
-    <link name="root">
+    <link name="odom">
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
@@ -283,14 +296,14 @@
         </collision>
 
         <visual>
-          <origin xyz="0 0 0.0" rpy="0 0 0"/>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
             <box size = "0 0 0"/>
           </geometry>
         </visual>
     </link>
 
-    <xacro:fixed name="body" pname="root" origin="0 0 0"/> 
+    <xacro:fixed name="body" pname="odom" origin="0 0 0"/> 
 
     <xacro:motor name="motor_1"> 
         <xacro:revolute name="motor_1" pname="body" origin="${bodylen/2-motorlen-0.01} ${bodywidth/2-bigmotorlen/2} ${-bigmotorwidth +bodyheight/2 + 0.01}" axis="1 0 0"/> 

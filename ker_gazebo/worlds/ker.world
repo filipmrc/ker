@@ -13,7 +13,7 @@
                 <type>quick</type>
                 <min_step_size>0.0001</min_step_size>
                 <iters>500</iters>
-                <sor>1.1</sor>
+                <sor>1.0</sor>
         </solver>
       </ode>
     </physics>

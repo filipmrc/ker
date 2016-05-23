@@ -15,7 +15,7 @@ T_foot_leg3 = FK(as_foot_leg, ds_foot_leg, thetas_foot_leg3, alphas_foot_leg);
 T_foot_leg4 = FK(as_foot_leg, ds_foot_leg, thetas_foot_leg4, alphas_foot_leg);
 
 %% Generate leg to foot FK
-syms a1 a2 d4
+a1 = 0.0272; a2 = 0.056; d4 = 0.03958;
 as_leg_foot = [a1 a2 0 0];
 ds_leg_foot = [0 0 0 d4];
 alphas_leg_foot = [-pi/2 0 pi/2 0];
@@ -31,7 +31,7 @@ T_leg_foot4 = FK(as_leg_foot, ds_leg_foot, thetas_leg_foot4, alphas_leg_foot);
 
 %% Generate body to leg FK
 % konačni izrazi za stopala u lokalnom koordinatnom sustavu (tijela)
-syms al aw ah
+al = 0.07282; aw = 0.036; ah = -0.01;
 as_body_leg1 = [al aw ah];
 as_body_leg2 = [al -aw ah];
 as_body_leg3 = [-al -aw ah];

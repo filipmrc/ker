@@ -12,8 +12,8 @@
         <solver>
                 <type>quick</type>
                 <min_step_size>0.0001</min_step_size>
-                <iters>100</iters>
-                <sor>0.4</sor>
+                <iters>500</iters>
+                <sor>1.1</sor>
         </solver>
       </ode>
     </physics>

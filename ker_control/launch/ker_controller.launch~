@@ -16,4 +16,6 @@
     <!--remap from="/joint_states" to="/ker/joint_states" /-->
   </node>
 
+  <node name="frame_broadcaster" pkg="ker_control" type="frame_broadcaster" output="screen"> </node>
+
 </launch>
