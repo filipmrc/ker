@@ -1,0 +1,25 @@
+rosshutdown;
+clear shoulder_pub, leg_pub;
+initialize_ros_interface;
+
+
+q0 = [0,0,0]';
+u = 1
+Q = [q0(1), 0, 0, 0, q0(2), q0(3), 0, 0, 0, 0, 0, 0];
+T_ = leg_fk(q0(1),q0(2),q0(3));
+w0 = T_(1:3,4);
+
+Mask = [0  0 1 0
+        0  1 0 0
+       -1  0 0 0
+        0  0 0 1];
+T = Mask*T_;
+w0_tf = T(1:3,4); 
+send_msgs(Q,shoulder_pub,leg_pub);
+
+w1 = [0.10, 0, 0.02];
+q1 = IK_mex(w1);
+q1_closest = closest_q(q0,q1);
+u = 2;
+Q = [q1_closest(1), 0, 0, 0, q1_closest(2), q1_closest(3), 0, 0, 0, 0, 0, 0];
+send_msgs(Q,shoulder_pub,leg_pub);
