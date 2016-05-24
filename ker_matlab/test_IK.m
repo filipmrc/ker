@@ -1,5 +1,4 @@
 e_max = 0;
-% leg_fk = matlabFunction(subs(T_leg_foot1,{'a1','a2','d4'},{0.0272,0.056,0.03958}),'File', 'leg_fk.m');
 for i = 1:1
     for j = 1:50
         for k = 1:50

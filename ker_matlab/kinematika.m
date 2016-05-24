@@ -29,9 +29,10 @@ T_leg_foot2 = FK(as_leg_foot, ds_leg_foot, thetas_leg_foot2, alphas_leg_foot);
 T_leg_foot3 = FK(as_leg_foot, ds_leg_foot, thetas_leg_foot3, alphas_leg_foot);
 T_leg_foot4 = FK(as_leg_foot, ds_leg_foot, thetas_leg_foot4, alphas_leg_foot);
 
+leg_fk = matlabFunction(T_leg_foot1);
 %% Generate body to leg FK
 % konačni izrazi za stopala u lokalnom koordinatnom sustavu (tijela)
-al = 0.07282; aw = 0.036; ah = -0.01;
+al = 0.073; aw = 0.036; ah = 0.00;
 as_body_leg1 = [al aw ah];
 as_body_leg2 = [al -aw ah];
 as_body_leg3 = [-al -aw ah];
@@ -51,12 +52,13 @@ T_body_foot2 = T_body_leg2*T_leg_foot2; % naprijed desno
 T_body_foot3 = T_body_leg3*T_leg_foot3; % straga desno
 T_body_foot4 = T_body_leg4*T_leg_foot4; % straga lijevo
 
-FK_1 = matlabFunction(T_body_foot1);
-FK_2 = matlabFunction(T_body_foot2);
-FK_3 = matlabFunction(T_body_foot3);
-FK_4 = matlabFunction(T_body_foot4);
+body_foot1 = matlabFunction(T_body_foot1);
+body_foot2 = matlabFunction(T_body_foot2);
+body_foot3 = matlabFunction(T_body_foot3);
+body_foot4 = matlabFunction(T_body_foot4);
 
 %% Global coordinate system to body FK
+% iz tf, može se maknut
 %transformacija lokalnog koordinatnog sustava u globalni
 syms ag dg alphag thetag
 T_global = FK(ag,dg,thetag,alphag);  %default koji se definira IMU-om
@@ -80,6 +82,13 @@ J1_A = generateJacobian_A(T_body_foot1,q1,q2,q3); % naprijed lijevo
 J2_A = generateJacobian_A(T_body_foot2,q4,q5,q6); % naprijed desno
 J3_A = generateJacobian_A(T_body_foot3,q7,q8,q9); % straga desno
 J4_A = generateJacobian_A(T_body_foot4,q10,q11,q12); % straga lijevo
+
+J1A = matlabFunction(J1_A);
+J2A = matlabFunction(J2_A);
+J3A = matlabFunction(J3_A);
+J4A = matlabFunction(J4_A);
+
+clear J1_A J2_A J3_A J4_A
 
 dFPLdq  = [J1_A zeros(3,9); zeros(3,3) J2_A zeros(3,6); zeros(3,6) J3_A zeros(3,3); zeros(3,9) J4_A];
 dLdFPL = FPL/(sqrt(sum(sum(FPL.^2))));
