@@ -18,7 +18,7 @@ int main(int argc, char** argv){
   tf::TransformBroadcaster br;
   tf::Transform transform;
 
-  float al = 0.07282, aw = 0.036, ah = -0.01;
+  float al = 0.073, aw = 0.036, ah = -0.00, dl = 0.04 + 0.018;
 
   ros::Rate rate(30.0);
   while (n.ok()){
@@ -30,11 +30,11 @@ int main(int argc, char** argv){
     transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "body", "leg_2"));
 
-    transform.setOrigin( tf::Vector3(-al, -aw, ah) );
+    transform.setOrigin( tf::Vector3(-al + dl, -aw, ah) );
     transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "body", "leg_3"));
 
-    transform.setOrigin( tf::Vector3(-al, aw, ah) );
+    transform.setOrigin( tf::Vector3(-al + dl, aw, ah) );
     transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "body", "leg_4"));
 
