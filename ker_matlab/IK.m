@@ -1,7 +1,7 @@
 function [ Q ] = IK( w)
 %IK za kera
-a1 = 0.0272; a2 = 0.056; d4 = 0.03958;
-
+a1 = 0.0272; a2 = 0.056; d4 = 0.05056;
+global leg_fk
 x = w(1);
 y = w(2);
 z = w(3);

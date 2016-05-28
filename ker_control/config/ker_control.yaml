@@ -19,21 +19,21 @@ ker:
     
     gains:
       humerus_1_joint:
-        {p: 1000, d: 0.0, i: 0.0, i_clamp: 0.0}  
+        {p: 1, d: 0.0, i: 0.0, i_clamp: 0.0}  
       humerus_2_joint:
-        {p: 1000, d: 0.0, i: 0.0, i_clamp: 0.0}  
+        {p: 1, d: 0.0, i: 0.0, i_clamp: 0.0}  
       radius_1_joint:
-        {p: 1000, d: 0.0, i: 0.0, i_clamp: 0.0}  
+        {p: 1, d: 0.0, i: 0.0, i_clamp: 0.0}  
       radius_2_joint:
-        {p: 1000, d: 0.0, i: 0.0, i_clamp: 0.0} 
+        {p: 1, d: 0.0, i: 0.0, i_clamp: 0.0} 
       femur_1_joint:
-        {p: 1000, d: 0.0, i: 0.0, i_clamp: 0.0} 
+        {p: 1, d: 0.0, i: 0.0, i_clamp: 0.0} 
       femur_2_joint:
-        {p: 1000, d: 0.0, i: 0.0, i_clamp: 0.0} 
+        {p: 1, d: 0.0, i: 0.0, i_clamp: 0.0} 
       tibula_1_joint:
-        {p: 1000, d: 0.0, i: 0.0, i_clamp: 0.0} 
+        {p: 1, d: 0.0, i: 0.0, i_clamp: 0.0} 
       tibula_2_joint:
-        {p: 1000, d: 0.0, i: 0.0, i_clamp: 0.0} 
+        {p: 1, d: 0.0, i: 0.0, i_clamp: 0.0} 
 
   ker_shoulder_controller:
     type: "position_controllers/JointGroupPositionController"
@@ -46,12 +46,12 @@ ker:
 
     gains:
        motor_1_joint:
-         {p: 1000, d: 0.2, i: 0.0, i_clamp: 0.0}      
+         {p: 1, d: 0, i: 0.0, i_clamp: 0.0}      
        motor_2_joint:
-         {p: 1000, d: 0.2, i: 0.0, i_clamp: 0.0}      
+         {p: 1, d: 0, i: 0.0, i_clamp: 0.0}      
        motor_3_joint:
-         {p: 1000, d: 0.2, i: 0.0, i_clamp: 0.0}      
+         {p: 1, d: 0, i: 0.0, i_clamp: 0.0}      
        motor_4_joint:
-         {p: 1000, d: 0.2, i: 0.0, i_clamp: 0.0}         
+         {p: 1, d: 0, i: 0.0, i_clamp: 0.0}         
 
 

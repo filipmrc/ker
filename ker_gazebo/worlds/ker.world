@@ -9,12 +9,12 @@
     </include>
     <physics type="ode">
       <ode>
-        <solver>
-                <type>quick</type>
-                <min_step_size>0.0001</min_step_size>
-                <iters>500</iters>
-                <sor>1.0</sor>
-        </solver>
+        <solver> 
+          <type>quick</type> 
+          <iters>5000</iters> 
+          <precon_iters>0</precon_iters> 
+          <sor>1.300000</sor> 
+        </solver> 
       </ode>
     </physics>
   </world>
