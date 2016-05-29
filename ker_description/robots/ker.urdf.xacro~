@@ -224,13 +224,13 @@
         </visual>
     </link>
     <gazebo reference="${name}">
-        <kp>100000.0</kp>
-        <kd>1.0</kd>
+        <kp>10000000.0</kp>
+        <kd>10.0</kd>
         <mu1>100000.0</mu1>
         <mu2>100000.0</mu2>
-        <fdir1>1 1 0</fdir1>
+        <fdir1>1 1 1</fdir1>
         <maxVel>1.2</maxVel>
-        <minDepth>0.01</minDepth>
+        <minDepth>0.00</minDepth>
     </gazebo>
     <xacro:insert_block name="type" />
     <xacro:ker_transmission joint_name="${name}_joint" /> 
@@ -260,11 +260,11 @@
         </visual>
     </link>
     <gazebo reference="${name}">
-        <kp>100000.0</kp>
-        <kd>1.0</kd>
+        <kp>10000000.0</kp>
+        <kd>10.0</kd>
         <mu1>100000.0</mu1>
         <mu2>100000.0</mu2>
-        <fdir1>1 1 0</fdir1>
+        <fdir1>1 1 1</fdir1>
         <maxVel>1.2</maxVel>
         <minDepth>0.00</minDepth>
     </gazebo>

@@ -11,7 +11,7 @@
       <ode>
         <solver> 
           <type>quick</type> 
-          <iters>5000</iters> 
+          <iters>1000</iters> 
           <precon_iters>0</precon_iters> 
           <sor>1.300000</sor> 
         </solver> 

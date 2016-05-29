@@ -29,6 +29,11 @@ T_leg_foot2 = FK(as_leg_foot, ds_leg_foot, thetas_leg_foot2, alphas_leg_foot);
 T_leg_foot3 = FK(as_leg_foot, ds_leg_foot, thetas_leg_foot3, alphas_leg_foot);
 T_leg_foot4 = FK(as_leg_foot, ds_leg_foot, thetas_leg_foot4, alphas_leg_foot);
 
+% leg_foot1 = matlabFunction(rot*T_leg_foot1*rot2);
+% leg_foot2 = matlabFunction(rot*T_leg_foot2*rot2);
+% leg_foot3 = matlabFunction(rot*T_leg_foot3*rot2);
+% leg_foot4 = matlabFunction(rot*T_leg_foot4*rot2);
+
 global leg_fk
 leg_fk = matlabFunction(T_leg_foot1);
 %% Generate body to leg FK
@@ -41,6 +46,7 @@ T_body_leg3 = [1 0 0 -al; 0 1 0 -aw; 0 0 1 ah; 0 0 0 1];
 T_body_leg4 = [1 0 0 -al; 0 1 0 aw; 0 0 1 ah; 0 0 0 1];
 
 rot = [0 0 1 0; 0 1 0 0; -1 0 0 0; 0 0 0 1];
+rot2 = [-1 0 0 0; 0 1 0 0; 0 0 -1 0; 0 0 0 1];
 
 T_body_foot1 = T_body_leg1*rot*T_leg_foot1; % naprijed lijevo
 T_body_foot2 = T_body_leg2*rot*T_leg_foot2; % naprijed desno
@@ -56,6 +62,11 @@ J1_A = generateJacobian_A(T_body_foot1,q1,q2,q3); % naprijed lijevo
 J2_A = generateJacobian_A(T_body_foot2,q4,q5,q6); % naprijed desno
 J3_A = generateJacobian_A(T_body_foot3,q7,q8,q9); % straga desno
 J4_A = generateJacobian_A(T_body_foot4,q10,q11,q12); % straga lijevo
+
+% J1_A = generateJacobian_A(rot*T_leg_foot1*rot2,q1,q2,q3); % naprijed lijevo
+% J2_A = generateJacobian_A(rot*T_leg_foot2*rot2,q4,q5,q6); % naprijed desno
+% J3_A = generateJacobian_A(rot*T_leg_foot3*rot2,q7,q8,q9); % straga desno
+% J4_A = generateJacobian_A(rot*T_leg_foot4*rot2,q10,q11,q12); % straga lijevo
 
 global J1A J2A J3A J4A;
 

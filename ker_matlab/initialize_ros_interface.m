@@ -8,4 +8,5 @@ pause(2);
 joint_sub = rossubscriber('/joint_states', rostype.sensor_msgs_JointState);
 pause(2);
 
+global tftree;
 tftree = rostf;

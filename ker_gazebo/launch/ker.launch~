@@ -4,7 +4,7 @@
     <!-- these are the arguments you can pass this launch file, for example paused:=true -->
     <arg name="paused" default="false"/>
     <arg name="use_sim_time" default="true"/>
-    <arg name="gui" default="true"/>
+    <arg name="gui" default="false"/>
     <arg name="headless" default="true"/>
     <arg name="debug" default="false"/>
     <arg name="verbose" default="false"/>
@@ -45,6 +45,6 @@
   <!-- state publisher -->
 
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -z 0.145 -model ker" />
-  <node name="rviz" pkg="rviz" type="rviz"/>
+  <!--node name="rviz" pkg="rviz" type="rviz"/-->
   <include file="$(find ker_control)/launch/ker_controller.launch" />
 </launch>

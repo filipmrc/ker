@@ -18,7 +18,7 @@ int main(int argc, char** argv){
   tf::TransformBroadcaster br;
   tf::Transform transform;
 
-  float al = 0.073, aw = 0.036, ah = -0.00, dl = 0.04 + 0.018;
+  float al = 0.073, aw = 0.036, ah = -0.00, d4 = 0.05056;
 
   ros::Rate rate(30.0);
   while (n.ok()){
@@ -41,6 +41,13 @@ int main(int argc, char** argv){
     transform.setOrigin( tf::Vector3(odom.position.x, odom.position.y, odom.position.z));
     transform.setRotation(tf::Quaternion(odom.orientation.x,odom.orientation.y,odom.orientation.z,odom.orientation.w));
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "map", "odom"));
+
+    transform.setOrigin( tf::Vector3(0, 0, -d4 - 0.012));
+    transform.setRotation(tf::Quaternion(0,0,0,1));
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "radius_1", "foot_1"));
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "radius_2", "foot_2"));
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "tibula_2", "foot_3"));
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "tibula_1", "foot_4"));
 
     ros::spinOnce();
     rate.sleep();
