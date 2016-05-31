@@ -2,7 +2,7 @@
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <group>
     <!-- these are the arguments you can pass this launch file, for example paused:=true -->
-    <arg name="paused" default="false"/>
+    <arg name="paused" default="true"/>
     <arg name="use_sim_time" default="true"/>
     <arg name="gui" default="true"/>
     <arg name="headless" default="false"/>
@@ -36,15 +36,18 @@
   </group>
 
 	<param name="robot_description"
-    command="$(find xacro)/xacro '$(find ker_description)/robots/ker.urdf.xacro'" />
+    command="$(find xacro)/xacro '$(find ker_description)/robots/ker_analytic.urdf.xacro'" />
 
+
+	<param name="robot_description_sdf"
+    textfile="$(find ker_description)/robots/ker.sdf" />
   <!--include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find ker_gazebo)/worlds/ker.world"/>-->
     <!-- more default parameters can be changed here -->
   <!--/include-->
   <!-- state publisher -->
 
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -z 0.145 -model ker" />
+  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -z 0.145 -model ker" output="screen" />
   <!--node name="rviz" pkg="rviz" type="rviz"/-->
   <include file="$(find ker_control)/launch/ker_controller.launch" />
 </launch>

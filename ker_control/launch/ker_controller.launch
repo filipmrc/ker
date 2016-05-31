@@ -1,14 +1,20 @@
 <launch>  
 
 <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find ker_control)/config/ker_control.yaml" command="load"/>
+  <rosparam file="$(find ker_control)/config/ker_effort_control.yaml" command="load"/>
 
   <!-- spawn state controller -->
   <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" args="ker/joint_state_controller" />
 
   <!-- load the controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" args="ker/ker_shoulder_controller ker/ker_leg_controller"/>
+  <node name="controller_spawner_shoulder" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" args="ker/lf_shoulder_position_controller ker/rf_shoulder_position_controller ker/rb_shoulder_position_controller ker/lb_shoulder_position_controller"/>
+
+  <node name="controller_spawner_knee" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" args="ker/lf_humerus_position_controller ker/rf_humerus_position_controller ker/rb_femur_position_controller ker/lb_femur_position_controller"/>
+
+  <node name="controller_spawner_foot" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" args="ker/lf_radius_position_controller ker/rf_radius_position_controller ker/rb_tibula_position_controller ker/lb_tibula_position_controller"/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

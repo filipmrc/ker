@@ -141,18 +141,18 @@ int main(int argc, char** argv)
   while(ros::ok())
     {
       goal.resize(NUM_JOINTS);
-      goal[0] = PI/10;
-      goal[1] = -PI/10;
-      goal[2] = -PI/10;
-      goal[3] = PI/10;
-      goal[4] = -PI/6;
-      goal[5] = PI/3;
-      goal[6] = -PI/6;
-      goal[7] = PI/3;
-      goal[8] = PI/6;
-      goal[9] = -PI/3;
-      goal[10] = PI/6;
-      goal[11] = -PI/3;
+      goal[0] = PI/12;
+      goal[1] = -PI/12;
+      goal[2] = -PI/12;
+      goal[3] = PI/12;
+      goal[4] = PI/5;
+      goal[5] = -PI/2.5;
+      goal[6] = PI/5;
+      goal[7] = -PI/2.5;
+      goal[8] = PI/5;
+      goal[9] = -PI/2.5;
+      goal[10] = PI/5;
+      goal[11] = -PI/2.5;
       ker.setJoint(goal);
       ros::spinOnce();
       r.sleep();
