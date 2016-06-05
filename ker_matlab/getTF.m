@@ -1,5 +1,5 @@
 function [ T ] = getTF(f2,f1)
-%GETTF Summary of this function goes here
+%GETTF Get transformation between frames
 %   Detailed explanation goes here
 
 global tftree;

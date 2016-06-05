@@ -1,10 +1,10 @@
 function [ Q ] = IK( w)
-%IK za kera
+%IK Inverse kinematics algorithm for single leg in shoulder frame
 a1 = 0.0272; a2 = 0.056; d4 = 0.05056;
 global leg_fk
-x = w(1);
+x = -w(3);
 y = w(2);
-z = w(3);
+z = w(1);
 q = zeros(3,16);
 
 q(1,1:16) = atan2(y,x);

@@ -49,7 +49,7 @@
       <transmission name="${joint_name}_transmission">
         <type>transmission_interface/SimpleTransmission</type>
           <joint name="${joint_name}">
-            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <hardwareInterface>PositionJointInterface</hardwareInterface>
           </joint>
           <actuator name="${joint_name}_motor">
             <mechanicalReduction>1</mechanicalReduction>

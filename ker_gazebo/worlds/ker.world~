@@ -44,7 +44,7 @@
     <include>
       <uri>model://sun</uri>
     </include>
-    <physics type="dart">
+    <physics type="simbody">
       <ode>
         <solver> 
           <type>quick</type> 
