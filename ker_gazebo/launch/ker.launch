@@ -38,9 +38,6 @@
 	<param name="robot_description"
     command="$(find xacro)/xacro '$(find ker_description)/robots/ker_analytic.urdf.xacro'" />
 
-
-	<param name="robot_description_sdf"
-    textfile="$(find ker_description)/robots/ker.sdf" />
   <!--include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find ker_gazebo)/worlds/ker.world"/>-->
     <!-- more default parameters can be changed here -->

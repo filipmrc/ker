@@ -2,7 +2,7 @@
 q = getJointStates(joint_sub);    
 q_leg = [q(7) , q(3), q(5), q(8) , q(4), q(6), q(9) , q(2), q(12),q(10), q(1), q(11)]';
 
-goal = [0.01;0.00;0.00;0;0.0;0.0];
+goal = [0.000;0.000;-0.001;0.00;0.0;0.0];
 
 T_c1b = body_foot1(q_leg(1), q_leg(2), q_leg(3));
 T_c2b = body_foot2(q_leg(4), q_leg(5), q_leg(6));
@@ -21,5 +21,4 @@ dw_bb = goal;
 pq = (P)\Q;
 qa = pinv(pq)*dw_bb;
 q = getJointStates(joint_sub);    
-q_leg = [q(7) , q(3), q(5), q(8) , q(4), q(6), q(9) , q(2), q(12),q(10), q(1), q(11)]';
 execute(q_leg+qa);

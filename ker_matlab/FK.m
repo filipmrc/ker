@@ -11,11 +11,5 @@ for cnt= 1 : size(a_i,2)
     Ti{cnt} = subs(T_gen, {'alph' 'theta'  'd'  'a'},{ alpha_i(cnt) theta_i(cnt) d_i(cnt)  a_i(cnt)});
     T = T * subs(T_gen, {'alph' 'theta'  'd'  'a'},{ alpha_i(cnt) theta_i(cnt) d_i(cnt)  a_i(cnt)});
 end
-
-
-
-
-
-
 end
 
