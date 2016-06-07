@@ -21,5 +21,4 @@ dw_bb = goal;
 pq = (P)\Q;
 qa = pinv(pq)*dw_bb;
 q = getJointStates(joint_sub);    
-q_leg = [q(7) , q(3), q(5), q(8) , q(4), q(6), q(9) , q(2), q(12),q(10), q(1), q(11)]';
 execute(q_leg+qa);
