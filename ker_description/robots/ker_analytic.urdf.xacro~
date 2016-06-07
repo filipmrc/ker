@@ -49,7 +49,7 @@
       <transmission name="${joint_name}_transmission">
         <type>transmission_interface/SimpleTransmission</type>
           <joint name="${joint_name}">
-            <hardwareInterface>PositionJointInterface</hardwareInterface>
+            <hardwareInterface>VelocityJointInterface</hardwareInterface>
           </joint>
           <actuator name="${joint_name}_motor">
             <mechanicalReduction>1</mechanicalReduction>
@@ -128,7 +128,7 @@
             <origin xyz="${origin}" rpy="${rot}"/>
             <axis xyz="${axis}"/>
             <dynamics damping="0.002" friction="0.01"/>
-            <limit effort="0.4" velocity="0.5" lower="-3.14" upper="3.14"/>
+            <limit effort="0.4" velocity="1.0" lower="-3.14" upper="3.14"/>
         </joint>
     </xacro:macro>
 

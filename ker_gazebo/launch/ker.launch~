@@ -48,6 +48,6 @@
   <!-- state publisher -->
 
   <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -z 0.145 -model ker" output="screen" />
-  <node name="rviz" pkg="rviz" type="rviz"/>
+  <!--node name="rviz" pkg="rviz" type="rviz"/-->
   <include file="$(find ker_control)/launch/ker_controller.launch" />
 </launch>
