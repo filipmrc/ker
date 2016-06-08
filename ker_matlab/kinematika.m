@@ -18,6 +18,9 @@ T_shoulder_foot2 = FK(as_shoulder_foot, ds_shoulder_foot, thetas_shoulder_foot2,
 T_shoulder_foot3 = FK(as_shoulder_foot, ds_shoulder_foot, thetas_shoulder_foot3, alphas_shoulder_foot);
 T_shoulder_foot4 = FK(as_shoulder_foot, ds_shoulder_foot, thetas_shoulder_foot4, alphas_shoulder_foot);
 
+global leg_fk
+leg_fk = matlabFunction(T_shoulder_foot1);
+
 %% Generate body to shoulder FK
 %   Generate body to shoulder transformations
 al = 0.073; aw = 0.036; ah = 0;
