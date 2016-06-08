@@ -1,7 +1,6 @@
 function [ Q ] = IK( q0, w)
 %IK Inverse kinematics algorithm for single leg in shoulder frame
 a1 = 0.0272; a2 = 0.056; d4 = 0.0606;
-global leg_fk
 x = w(1)
 y = w(2)
 z = w(3)
@@ -81,7 +80,7 @@ q(2,16) = -q(2,8);
 
 Q = [];
 for k = size(q,2):-1:1
-    w_k = leg_fk(q(1,k),q(2,k),q(3,k));
+    w_k = legFK(q(1,k),q(2,k),q(3,k));
     if (norm(w-w_k(1:3,4)',inf) < 1e-6) % TODO: check cutoff
         Q = [Q q(:,k)];
     end
@@ -90,7 +89,7 @@ end
 % Provjera ogranicenja zakreta zglobova!!!
 Qq = [];
 for i = 1:size(Q,2)
-    if ( abs(Q(1,i)) <= pi/6 && abs(Q(2,i)) <= pi/2 && abs(Q(3,i)) <= pi/2 )
+    if ( abs(Q(1,i)) <= pi/2 && abs(Q(2,i)) <= pi/2 && abs(Q(3,i)) <= pi/2 )
         Qq = [Qq Q];
     end
 end
