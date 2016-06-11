@@ -54,11 +54,12 @@ word motor[8];
 void setup(){
 // Dynamixel 2.0 Protocol -> 0: 9600, 1: 57600, 2: 115200, 3: 1Mbps 
   Dxl.begin(3);
-  for(j = 0; j < 8; j++){
+  for(j = 0; j < 12; j++){
     Dxl.writeWord(j+1, CCW_Angle_Limit, 0); 
     Dxl.writeWord(j+1, CW_Angle_Limit, 0); 
     Dxl.writeByte(j+1, CONTROL_MODE, 1);
   }
+  delay(2000);
 }
 
 void loop(){
