@@ -129,17 +129,22 @@ include_directories(
 # add_dependencies(ker_hardware_interface ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(ker_hardware_interface src/ker_hardware_interface.cc)
+add_executable(ker_position_interface src/ker_position_interface.cc)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(ker_hardware_interface_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(ker_hardware_interface
+target_link_libraries(ker_position_interface
    ${catkin_LIBRARIES}
  )
 
+add_executable(ker_velocity_interface src/ker_velocity_interface.cc)
+
+target_link_libraries(ker_velocity_interface
+   ${catkin_LIBRARIES}
+ )
 #############
 ## Install ##
 #############

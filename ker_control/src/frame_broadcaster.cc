@@ -23,19 +23,19 @@ int main(int argc, char** argv){
   ros::Rate rate(30.0);
   while (n.ok()){
     transform.setOrigin( tf::Vector3(al, aw, ah) );
-    transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
+    transform.setRotation( tf::Quaternion(0, 0.70710678118654752440084436210485, 0,0.70710678118654752440084436210485) );
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "body", "leg_1"));
 
     transform.setOrigin( tf::Vector3(al, -aw, ah) );
-    transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
+    transform.setRotation( tf::Quaternion(0, 0.70710678118654752440084436210485, 0,0.70710678118654752440084436210485) );
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "body", "leg_2"));
 
     transform.setOrigin( tf::Vector3(-al, -aw, ah) );
-    transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
+    transform.setRotation( tf::Quaternion(0, 0.70710678118654752440084436210485, 0,0.70710678118654752440084436210485) );
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "body", "leg_3"));
 
     transform.setOrigin( tf::Vector3(-al, aw, ah) );
-    transform.setRotation( tf::Quaternion(0, 0, 0, 1) );
+    transform.setRotation( tf::Quaternion(0, 0.70710678118654752440084436210485, 0,0.70710678118654752440084436210485) );
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "body", "leg_4"));
 
     transform.setOrigin( tf::Vector3(odom.position.x, odom.position.y, odom.position.z));
