@@ -29,6 +29,9 @@
 #define P_GOAL_POSITION    30
 #define P_GOAL_SPEED    32
 #define PRESENT_POS 54
+#define P_Gain 29
+#define I_Gain 28
+#define D_Gain 27
 
 /********* Sync write data  **************
  * ID1, DATA1, DATA2..., ID2, DATA1, DATA2,...
@@ -43,11 +46,10 @@ Dynamixel Dxl(DXL_BUS_SERIAL1);
 
 int pos, i = 0, j = 0;
 int pos_goal = 0, vel_goal = 0;
-char poruka[]="" , motor1[5],motor2[5],motor3[5],motor4[5],motor5[5],motor6[5];
-char send_data[] = "", mot7[5],moto8[5];
-unsigned int stop = 0, start = 0;
-word motor[8];
-
+char poruka[]="";
+char send_data[] = "";
+word motor[12];
+int button = 0;
 //word SyncPage1[24]=
 //{ 
 //  ID_NUM_1,0,300,  // 3 Dynamixels are move to position 0
@@ -64,8 +66,23 @@ void setup(){
 // Dynamixel 2.0 Protocol -> 0: 9600, 1: 57600, 2: 115200, 3: 1Mbps 
   Dxl.begin(3);
   //Set all dynamixels as same condition.
-  Dxl.writeWord( BROADCAST_ID, P_GOAL_POSITION, 0 );
-  Dxl.writeWord( BROADCAST_ID, P_GOAL_SPEED, 500 );
+  Dxl.writeWord( BROADCAST_ID, P_GOAL_POSITION, 511 );
+  delay(200);
+  Dxl.writeWord( BROADCAST_ID, P_GOAL_SPEED, 200 );
+  for (j = 0; j < 12; j++){
+    if(j == 0 || j == 3 || j == 6 || j == 9){
+      Dxl.writeByte( j+1, P_Gain, 64);
+      Dxl.writeByte( j+1, D_Gain, 8);
+    }
+    Dxl.writeByte( j+1, P_Gain, 64 );
+    Dxl.writeByte( j+1, D_Gain, 8);
+  }
+//  Dxl.writeByte( BROADCAST_ID, P_Gain, 64 );
+//  Dxl.writeByte( BROADCAST_ID, D_Gain, 32 );
+  Dxl.ledOn(BROADCAST_ID, 3);
+  pinMode(BOARD_BUTTON_PIN, INPUT_PULLDOWN);
+  pinMode(BOARD_LED_PIN, OUTPUT);
+  
 }
 
 void loop(){
@@ -79,10 +96,19 @@ void loop(){
 //    SerialUSB.write(buffer);
 //    SerialUSB.write(">");
 //  }
-  start = micros();
-  for(j = 0; j < 8; j++){
+  if (digitalRead(BOARD_BUTTON_PIN)){
+    button = 1;
+  }
+  for(j = 0; j < 12; j++){
     pos = Dxl.readWord(j+1, PRESENT_POS);
-    itoa((1000*(j+1)+pos), &send_data[j*4], 10);
+    if (j == 1 || j == 4 || j == 6 || j == 8 || j == 11){
+      itoa(1022 - (pos), &send_data[j*3], 10);
+    }
+    else if (j == 9)
+      itoa(1022 - (pos), &send_data[j*3], 10);
+    else{
+      itoa((pos), &send_data[j*3], 10);
+    }
   }
   SerialUSB.write(send_data);
   SerialUSB.write('\r\n');
@@ -91,23 +117,24 @@ void loop(){
     poruka[i] = word(SerialUSB.read());   
     i++; 
   } 
-  if ( i > 0 ){
-    for(j = 0; j < 4; j++){
-      motor1[j] = poruka[j];
-      motor2[j] = poruka[j+4];
-      motor3[j] = poruka[j+8];
-      motor4[j] = poruka[j+12];
-      motor5[j] = poruka[j+16];
-      motor6[j] = poruka[j+20];
-      mot7[j] = poruka[j+24];
-      moto8[j] = poruka[j+28];
-    }
+  if ( i > 0 && button){
     
-    word motor[8] = {word(atoi(&motor1[0])), word(atoi(&motor2[0])), word(atoi(&motor3[0])), word(atoi(&motor4[0])), word(atoi(&motor5[0])), word(atoi(&motor6[0])), word(atoi(&mot7[0])), word(atoi(&moto8[0]))};
-
-    for( j = 0; j < 8; j++){
+    for(j = 0; j < 12; j++){
+      motor[j] = word(poruka[j*3]-'0')*100 + word(poruka[j*3+1]-'0')*10 + word(poruka[j*3+2]-'0');
+    }
+    motor[1] = 1022 - motor[1];
+    motor[4] = 1022 - motor[4];
+    motor[6] = 1022 - motor[6];
+    motor[8] = 1022 - motor[8];
+    motor[9] = 1022 - motor[9] - 5;
+    motor[11] = 1022 - motor[11];
+    for( j = 11; j >= 0; j--){
+      if (motor[j] == 0){
+        motor[j] = 512;
+      }
       Dxl.writeWord(j+1, P_GOAL_POSITION, motor[j]);
     }
+    
 //    SyncPage1[1] = word(atoi(&motor1[0]));
 //    SyncPage1[4] = word(atoi(&motor2[0]));
 //    SyncPage1[7] = word(atoi(&motor3[0]));
@@ -120,7 +147,6 @@ void loop(){
     char poruka[] = "";
     i = 0;
   }
-  stop = micros();
   //SerialUSB.print("Freq: ");
   //SerialUSB.println(float(1000000/(stop-start))); 
 }
