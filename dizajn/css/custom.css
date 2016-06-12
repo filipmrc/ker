@@ -1,0 +1,84 @@
+#the-slider img  {
+
+	width: 100%;
+
+}
+
+.navbar {
+
+	background-color: #282828;
+
+}
+
+.navbar li a {
+
+	color: white !important;
+	/*color: #ffff;*/
+
+}
+
+.navbar li a:hover {
+
+	color: green !important;
+	/*color: #ffff;*/
+
+}
+
+.navbar-default .navbar-nav>.active>a {
+
+	background-color: black !important;
+
+}
+
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    width: 100%;
+}
+
+
+#my_button_stop_led{
+    padding: 13px 19px;
+    font-size: 15px ; //change this to your desired size
+    line-height: normal;
+    -webkit-border-radius: 12px;
+       -moz-border-radius: 12px;
+            border-radius: 12px;
+}
+
+#my_button_1{
+    padding: 18px 10px;
+    font-size: 26px ; //change this to your desired size
+    line-height: normal;
+    -webkit-border-radius: 12px;
+       -moz-border-radius: 12px;
+            border-radius: 12px;
+}
+
+#my_button_horizontal{
+    padding: 10px 18px;
+    font-size: 26px ; //change this to your desired size
+    line-height: normal;
+    -webkit-border-radius: 12px;
+       -moz-border-radius: 12px;
+            border-radius: 12px;
+}
+
+
+#direction{
+    font-weight: bold;
+    color: green;
+}
+
+#goals strong{
+    font-weight: bold;
+    color: #003300;
+}

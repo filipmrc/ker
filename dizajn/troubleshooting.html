@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<script src="js/respond.js"></script>
+	
+
+</head>
+
+
+<body>
+	<div class="container">
+
+	<!-- row 1 -->
+	<!-- <header class="row">
+		<div>
+			<a href="#"><img src="images/elektroboj.png" alt="Bare i placenici"></a>
+		</div>
+	</header> -->
+
+
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+
+	  <div class="navbar-header">
+	    <a class="navbar-brand" href="https://www.estudent.hr/category/natjecanja/elektroboj/" target="newwindow">Elektroboj 2016</a>
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	      <span class="icon-bar"></span>
+	    </button>
+	  </div>
+
+	  <div class="navbar-collapse collapse">
+	    <ul class="nav navbar-nav">
+	        <li><a href="aboutproject.html">About project</a></li>
+	        <li><a href="connect.php">Connect</a></li>
+			<li><a href="team.html">Team</a></li>
+			<li class="active"><a href="troubleshooting.html">FAQ</a></li>
+			<li><a href="contact.html">Contact us</a></li>
+			<li><a href="gallery.html">Gallery</a></li>
+			<li><a href="127.0.0.1:8081" target="newwindow">Camera live stream</a></li>
+	    </ul>
+	    </div>
+
+	  </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+ 
+
+
+	<!-- Bootstrap FAQ - START -->
+	<div class="container">
+
+	    <div class="alert alert-warning alert-dismissible" role="alert">
+	        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        This section contains a wealth of infromation, related to <strong>Frequently asked quesions</strong> and <strong>Troubleshooting</strong>. If you cannot find an answer to your question, make sure to <a href="contact.html" class="href">contact us</a>. 
+	    </div>
+
+	    
+
+	    <div class="panel-group" id="accordion">
+
+	        <div class="faqHeader">General questions</div>
+
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a>
+	                </h4>
+	            </div>
+	            <div id="collapseOne" class="panel-collapse collapse">
+	                <div class="panel-body">
+	                    Account registration is not required in this version of project. 
+	                </div>
+	            </div>
+	        </div>
+
+	        
+
+			<br><br>
+
+	        <div class="faqHeader">Network</div>
+
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">On what network do I have to be connected?</a>
+	                </h4>
+	            </div>
+	            <div id="collapseTwo" class="panel-collapse collapse">
+	                <div class="panel-body">
+	                    You have to be connected on the same network as Raspberry Pi.
+	                </div>
+	            </div>
+	        </div>
+
+
+
+			<br><br>
+
+	        <div class="faqHeader">ROS</div>
+
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">What is ROS?</a>
+	                </h4>
+	            </div>
+	            <div id="collapseFour" class="panel-collapse collapse">
+	                <div class="panel-body">
+	                    The Robot Operating System (ROS) is a set of software libraries and tools that help you build robot applications. From drivers to state-of-the-art algorithms, and with powerful developer tools, ROS has what you need for your next robotics project. And it's all open source ! 
+	                </div>
+	            </div>
+	        </div>
+
+	</div>
+
+	<!-- <div id="footer">
+      <div class="container">
+        <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+      </div>
+    </div> -->
+
+    
+
+	<div class="container" id="footer">
+	  <div class="row">
+	  <hr>
+	    <div class="col-lg-12">
+	      <div class="col-md-8 col-xs-5">
+	        <a href="#">Terms of Service</a> | <a href="#">Privacy</a>    
+	      </div>
+	      <div class="col-md-4 col-xs-7">
+	        <p class="muted pull-right"><strong>© 2016 Bare i Plaćenici.</strong> All rights reserved</p>
+	        <br><br>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
+	<style>
+	    .faqHeader {
+	        font-size: 27px;
+	        margin: 20px;
+	    }
+
+	    .panel-heading [data-toggle="collapse"]:after {
+	        font-family: 'Glyphicons Halflings';
+	        content: "\e072"; /* "play" icon */
+	        float: right;
+	        color: #F58723;
+	        font-size: 18px;
+	        line-height: 22px;
+	        /* rotate "play" icon from > (right arrow) to down arrow */
+	        -webkit-transform: rotate(-90deg);
+	        -moz-transform: rotate(-90deg);
+	        -ms-transform: rotate(-90deg);
+	        -o-transform: rotate(-90deg);
+	        transform: rotate(-90deg);
+	    }
+
+	    .panel-heading [data-toggle="collapse"].collapsed:after {
+	        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+	        -webkit-transform: rotate(90deg);
+	        -moz-transform: rotate(90deg);
+	        -ms-transform: rotate(90deg);
+	        -o-transform: rotate(90deg);
+	        transform: rotate(90deg);
+	        color: #454444;
+	    }
+	</style>
+
+	<!-- Bootstrap FAQ - END -->
+
+<script src="jquery/jquery-2.2.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+	</div>
+
+</body>
+</html>
